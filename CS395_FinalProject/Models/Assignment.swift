@@ -7,10 +7,13 @@
 
 import Foundation
 
-struct Assignment{
+struct Assignment: Identifiable{
+    let id = UUID()
+    
     var title: String
     var description: String?
     var dueDate: Date
     var course: String
     var assignmentType: String
+    var completed: Bool = false
 }
