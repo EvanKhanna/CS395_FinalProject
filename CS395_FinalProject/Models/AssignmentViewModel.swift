@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class AssignmentViewModel: ObservableObject {
+    @Published var assignments: [Assignment] = Assignment.getAssignments()
+}

@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct AssignmentListView: View {
-    @State private var assignments: [Assignment] = [
-        Assignment(title: "Math Homework", description: "Chapter 2 Exercises", dueDate: Date(), course: "Math", assignmentType: "Homework"),
-        Assignment(title: "English Essay", description: "Write an essay on Shakespeare", dueDate: Date().addingTimeInterval(86400), course: "English", assignmentType: "Essay"),
-    ]
-    
+    @StateObject private var viewModel = AssignmentViewModel()
+
     var body: some View {
         NavigationView {
-            List(assignments) { assignment in
-                NavigationLink(destination: AssignmentDetailView(assignment: $assignments[getIndex(of: assignment)])) {
+            List(viewModel.assignments) { assignment in
+                NavigationLink(destination: AssignmentDetailView(assignment: $viewModel.assignments[getIndex(of: assignment)])) {
                     AssignmentRow(assignment: assignment)
                 }
             }
@@ -24,11 +21,11 @@ struct AssignmentListView: View {
         }
     }
     
-    // Helper function to get the index of an assignment
     private func getIndex(of assignment: Assignment) -> Int {
-        return assignments.firstIndex(where: { $0.id == assignment.id }) ?? 0
+        return viewModel.assignments.firstIndex(where: { $0.id == assignment.id }) ?? 0
     }
 }
+
 
 struct AssignmentRow: View {
     var assignment: Assignment
