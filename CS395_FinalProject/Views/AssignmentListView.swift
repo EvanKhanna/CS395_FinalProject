@@ -8,23 +8,26 @@
 import SwiftUI
 
 struct AssignmentListView: View {
-    @StateObject private var viewModel = AssignmentViewModel()
+    @EnvironmentObject var assignmentViewModel: AssignmentViewModel  // Shared ViewModel
 
     var body: some View {
         NavigationView {
-            List(viewModel.assignments) { assignment in
-                NavigationLink(destination: AssignmentDetailView(assignment: $viewModel.assignments[getIndex(of: assignment)])) {
+            List(assignmentViewModel.assignments) { assignment in
+                NavigationLink(
+                    destination: AssignmentDetailView(assignment: $assignmentViewModel.assignments[getIndex(of: assignment)])
+                ) {
                     AssignmentRow(assignment: assignment)
                 }
             }
             .navigationTitle("Assignments")
         }
     }
-    
+
     private func getIndex(of assignment: Assignment) -> Int {
-        return viewModel.assignments.firstIndex(where: { $0.id == assignment.id }) ?? 0
+        return assignmentViewModel.assignments.firstIndex(where: { $0.id == assignment.id }) ?? 0
     }
 }
+
 
 
 struct AssignmentRow: View {

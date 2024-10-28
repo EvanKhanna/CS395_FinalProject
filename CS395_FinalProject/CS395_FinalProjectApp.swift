@@ -10,8 +10,11 @@ import SwiftUI
 @main
 struct CS395_FinalProjectApp: App {
     var body: some Scene {
+        let assignmentModel = AssignmentViewModel()
+        
         WindowGroup {
             MainView()
+                .environmentObject(assignmentModel)
         }
     }
 }

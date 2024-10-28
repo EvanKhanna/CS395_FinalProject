@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AssignmentComposeView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var assignmentViewModel: AssignmentViewModel
     @Binding var assignmentToEdit: Assignment?
     var onSave: (Assignment) -> Void
     
